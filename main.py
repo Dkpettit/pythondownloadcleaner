@@ -1,26 +1,28 @@
 import os
 import glob
 
-file_path="C:/Users/User/Downloads"
-
+file_path="C:/Users/User/Downloads/"
+target_directory = os.listdir(file_path)
+print(target_directory)
 pattern = "*.jpg"
 
-def find_files(base, pattern):
-    print(glob.glob(pattern))
-    '''Return list of files matching pattern in base folder.'''
-    return [n for n in glob.glob(pattern) if os.path.isfile(n) if
-        os.path.isfile(os.path.join(base, n))]
+pattern1 = ".jpg"
 
-target_files = find_files(file_path, pattern)
-
-print(target_files)
-
-for x in target_files:
-    print(x)
-    if os.path.isfile(x):
-        os.remove(x)
-        print("File has succesfully been deleted!")
+for item in target_directory:
+    file_name, file_extension = os.path.splitext(item)
+    if file_extension in {pattern1}:
+        print(item + " will be deleted.")
     else:
-        print("This file does NOT exist!!!")
+        print(item + " does not meet the requirements.")
+
+for item in glob.iglob(os.path.join(file_path, pattern)):
+    if os.path.isfile(item):
+        os.remove(item)
+        print(item + " has been removed./n")
+    else:
+        print(item + " does not meet the requirements.")
+
+
+
 
 
